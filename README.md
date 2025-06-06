@@ -27,4 +27,4 @@ For the assembly instruction :
 
 ## Driver installation
 
-As expected, this driver isn't signed by Microsoft ( maybe one day )
+As expected, this driver isn't signed by Microsoft ( maybe one day ) so it can only be used in a Windows system where the signed verification is disabled (aka, only test system).
