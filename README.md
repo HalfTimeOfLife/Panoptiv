@@ -1,8 +1,8 @@
 # Panoptiv
 
-<div style="text-align: center;">
+<p align="center">
   <img src="panoptiv.webp" alt="Panoptiv" width="35%" />
-</div>
+</p>
 
 A Windows Kernel Driver that bypass anti vm techniques using Windows API functions and assembly instruction.
 
