@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PanoptivDLL", "PanoptivDLL\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PanoptivApp", "PanoptivApp\PanoptivApp.vcxproj", "{CA424F7D-6642-479A-AAF3-69BDF1B7668B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PanoptivDriver", "PanoptivDriver\PanoptivDriver.vcxproj", "{773CC9EF-5912-952E-F453-4B0B0C010F4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -31,6 +33,18 @@ Global
 		{CA424F7D-6642-479A-AAF3-69BDF1B7668B}.Release|ARM64.Build.0 = Release|x64
 		{CA424F7D-6642-479A-AAF3-69BDF1B7668B}.Release|x64.ActiveCfg = Release|x64
 		{CA424F7D-6642-479A-AAF3-69BDF1B7668B}.Release|x64.Build.0 = Release|x64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Debug|ARM64.Build.0 = Debug|ARM64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Debug|x64.ActiveCfg = Debug|x64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Debug|x64.Build.0 = Debug|x64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Debug|x64.Deploy.0 = Debug|x64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Release|ARM64.ActiveCfg = Release|ARM64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Release|ARM64.Build.0 = Release|ARM64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Release|ARM64.Deploy.0 = Release|ARM64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Release|x64.ActiveCfg = Release|x64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Release|x64.Build.0 = Release|x64
+		{773CC9EF-5912-952E-F453-4B0B0C010F4C}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
