@@ -5,7 +5,7 @@
 
 int main() {
 
-	printf("[+] Panoptiv application loaded!\n");
+	printf("[+] Panoptiv application launched!\n");
 
 	HMODULE hDll = LoadLibraryW(_T("PanoptivDLL.dll"));
 
