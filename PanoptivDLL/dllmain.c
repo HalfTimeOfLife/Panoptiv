@@ -197,20 +197,37 @@ BOOL WINAPI HookedEnumServicesStatus(SC_HANDLE hSCManager, DWORD dwServiceType, 
 * @return TRUE if the function succeeds, FALSE otherwise.
 */
 DWORD WINAPI HookedGetAdaptersInfo(PIP_ADAPTER_INFO pAdapterInfo, PULONG pOutBufLen) {
-    if (!pAdapterInfo || !pOutBufLen) return ERROR_NOT_SUPPORTED;
-    if (!OriginalGetAdaptersInfo) return ERROR_NOT_SUPPORTED;
+    const DWORD requiredSize = sizeof(IP_ADAPTER_INFO);
+    if (!pOutBufLen) return ERROR_INVALID_PARAMETER;
 
-    while (pAdapterInfo) {
-        pAdapterInfo->Address[0] = 0x12;
-        pAdapterInfo->Address[1] = 0x34;
-        pAdapterInfo->Address[2] = 0x56;
-        pAdapterInfo->Address[3] = 0x78;
-        pAdapterInfo->Address[4] = 0x91;
-        pAdapterInfo->Address[5] = 0x00;
-        pAdapterInfo = pAdapterInfo->Next;
+    if (*pOutBufLen < requiredSize) {
+        *pOutBufLen = requiredSize;
+        return ERROR_BUFFER_OVERFLOW;
     }
 
+    if (!pAdapterInfo) return ERROR_INVALID_PARAMETER;
+
+    strcpy_s(pAdapterInfo->AdapterName, sizeof(pAdapterInfo->AdapterName), "Legit Adapter");
+    strcpy_s(pAdapterInfo->Description, sizeof(pAdapterInfo->Description), "Legit Network Adapter :)");
+    pAdapterInfo->AddressLength = 6;
+    pAdapterInfo->Address[0] = 0x12;
+    pAdapterInfo->Address[1] = 0x34;
+    pAdapterInfo->Address[2] = 0x56;
+    pAdapterInfo->Address[3] = 0x78;
+    pAdapterInfo->Address[4] = 0x91;
+    pAdapterInfo->Address[5] = 0x00;
+    pAdapterInfo->Type = MIB_IF_TYPE_ETHERNET;
+    pAdapterInfo->DhcpEnabled = 1;
+
+    pAdapterInfo->Next = NULL;
+
     return ERROR_SUCCESS;
+}
+
+LSTATUS WINAPI HookedRegOpenKeyExA(HKEY hkey, LPCSTR lpSubKey, DWORD ulOptions, REGSAM samDesired, PHKEY  phkResult)
+{
+	//No registry key found in virtual machine test (need to be tested on other virtual machine)
+	return ERROR_FILE_NOT_FOUND;
 }
 
 /**
@@ -272,8 +289,9 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 		InstallHook("powrprof.dll", "GetPwrCapabilities", HookedGetPwrCapabilities, originalBytes_GetPwrCapabilities, (void**)&OriginalGetPwrCapabilities);
 		InstallHook("kernel32.dll", "GetDiskFreeSpaceExA", HookedGetDiskFreeSpaceExA, originalBytes_GetDiskFreeSpaceExA, (void**)&OriginalGetDiskFreeSpaceExA);
         InstallHook("kernel32.dll", "GetSystemInfo", HookedGetSystemInfo, originalBytes_GetSystemInfo, (void**)&OriginalGetSystemInfo);
-		InstallHook("advapi32.dll", "EnumServicesStatus", HookedEnumServicesStatus, originalBytes_EnumServicesStatus, (void**)&OriginalEnumServicesStatus);
+		InstallHook("Advapi32.dll", "EnumServicesStatusA", HookedEnumServicesStatus, originalBytes_EnumServicesStatus, (void**)&OriginalEnumServicesStatus);
 		InstallHook("iphlpapi.dll", "GetAdaptersInfo", HookedGetAdaptersInfo, originalBytes_GetAdaptersInfo, (void**)&OriginalGetAdaptersInfo);
+		InstallHook("Advapi32.dll", "RegQueryValueExA", HookedRegOpenKeyExA, originalBytes_RegOpenKeyExA, (void**)&OriginalRegOpenKeyExA);
         break;
 
     case DLL_THREAD_ATTACH:

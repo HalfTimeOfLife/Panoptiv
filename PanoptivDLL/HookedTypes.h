@@ -41,8 +41,9 @@ typedef void (WINAPI* GetSystemInfo_s)(LPSYSTEM_INFO);
 GetSystemInfo_s OriginalGetSystemInfo = NULL;
 BYTE originalBytes_GetSystemInfo[5];
 
-typedef LSTATUS(WINAPI* RegQueryValueExA_s)(HKEY, LPCSTR, LPDWORD, LPDWORD, LPBYTE, LPDWORD);
-RegQueryValueExA_s OriginalRegQueryValueExA = NULL;
+typedef LSTATUS(WINAPI* RegOpenKeyExA_s)(HKEY, LPCSTR, LPDWORD, LPDWORD, LPBYTE, LPDWORD);
+RegOpenKeyExA_s OriginalRegOpenKeyExA = NULL;
+BYTE originalBytes_RegOpenKeyExA[5];
 
 typedef int (WINAPI* GetSystemMetrics_s)(int);
 GetSystemMetrics_s OriginalGetSystemMetrics = NULL;
